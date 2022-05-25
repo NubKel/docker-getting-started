@@ -2,11 +2,14 @@ pipeline {
     agent any
     
     stages {
-        stage('Build Docker image') {
+        stage('Clean previous docker') {
             steps {
                 sh 'docker kill $(docker ps -q)'
                 sh 'docker rm $(docker ps -a -q)'
-
+            }
+        }
+        stage('Build Docker image') {
+            steps {
                 sh 'docker build -t docker-getting-started .'
             }
         }
