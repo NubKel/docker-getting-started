@@ -5,6 +5,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 sh 'docker kill docker-getting-started'
+                sh 'docker rm -f docker-getting-started'
                 sh 'docker build -t docker-getting-started .'
             }
         }
