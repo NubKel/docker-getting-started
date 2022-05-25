@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Build Docker image') {
             steps {
-                sh 'docker kill docker-getting-started'
-                sh 'docker rm -f docker-getting-started'
+                sh 'docker kill $(docker ps -q)'
+                sh 'docker rm $(docker ps -a -q)'
+
                 sh 'docker build -t docker-getting-started .'
             }
         }
